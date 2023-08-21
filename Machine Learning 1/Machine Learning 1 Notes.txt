@@ -1,0 +1,35 @@
+Normalde veri eğitilmeden önce train ve test olarak ikiye ayrılır ama veri miktarı azsa train test diye ayırdığımız zaman model eğitilirken train diye ayrılan kısmı modeli tam temsil etmeyebilir. İşte tam burada devreye Cross Validation yani çapraz doğrulama girer. k fold Cross Validation ise orijinal veri setini yada train setini başka başka k parçaya bölüp k-1 i ile eğitim yapıp biri ile test yapar. Buradaki hataları al ortalaması Cross Validation error değeri olur. Train kısmına k fold Cross Validation yapılırsa yine test verisi ile test edilir.(Veriseti bolsa train kısmında k fold Cross Validation yapılabilir.)
+
+Overfitting modelin veriyi öğrenmesidir ama bizim amacımız modelin örüntüsünü modele öğretmektir. Burada yeni veriler tahmin edilirken sıkıntı çıkar. Yüksek varyans vardır. Underfitting de bu durumun tam tersidir. Underfitting de yüksek yanlılık vardır. Doğru bir modelde düşük yanlılık düşük varyans vardır.
+
+Overfitting i model karmaşıklığı - tahmin hatası grafiğinden anlayabiliriz.
+
+Modeldeki w, b değerlerinin nasıl olacağına cost fonksiyonu karar verir. Bu değeri min yapan w ve b değeri seçilir. Bu da cost fonksiyonunun Gradient Descent ini minimuma ulaştırma ile ilgilidir.
+Theta 0 = Theta 0 - alpha * derivative of cost function --------------> Gradient Descent
+
+NOT: Bir çok kaynakta regresyon yöntemlerinin çözümü olarak Gradient Descent algoritması olarak düşünse de Normal Denklemler Yöntemi bu yöntemlerin çözümüdür.
+SSE = sum of i = 1 to n (yi - yhat) ^ 2 
+w  = sum of i = 1 to n (xi - mean x ) * (yi - mean y) / (sum of i = 1 to n (xi - meanx ) ^ 2
+b  = meany - w * meanx
+
+Linear Regression da amaç cost function u minimum tutmakken Logistic Regression da amaç log loss function u minimum tutmaktır.
+Log Loss = 1/m * (sum of i = 1 to m (-yi * log(p(yhati)) - (1 - yi) log(1 - p(yhati))
+Dolayısıyla logistic regression dan bulunan değerler gerçek değerlere ne kadar yakınsa log loss fonksiyonu o kadar az olacaktır.
+Logistic regression un gradient descent değeri de linear regression unki gibidir.
+theta_j = theta_j - alpha * derivative of log loss
+
+Logistic Regression da accuracy değeri TP + TN / (TP + FN + TN + FP) 
+Precision = Pozitif sınıf tahminlerinin başarı oranıdır. TP/ (TP+FP)
+Recall = Pozitif sınıfın doğru tahmin edilme oranıdır. (TP / (TP + TN))
+Örneğin fraud detection sisteminde precision oranı sahtekar olup da sahtekar olarak tahmin edilenlerin oranının sahtekar olmayıp da sahkekar tahmin edilen ve sahtekar olup da sahtekar tahmin edilenlerin toplamına oranıdır.
+Yukarıdaki örnekte recall oranı da sahtekar olup da sahtekar tahmin edilenlerin sahtekar olup da sahtekar tahmin edilenlerin sahtekar olup da sahtekar olarak tahmin edilmeyenlerin toplamına oranıdır.
+f1 score : 2 * (Precision * Recall) / (Precision + Recall)
+
+Logistic Regression da her zaman accuracy e bakmak doğru değildir. f1 skoruna, precision ve recall değerlerine de bakmak gerekir.
+
+Olası thresholdlara göre True Positive Rate ve False Positive Rate oranlarını çıkartıp ROC curve elde edebiliriz. Bununla birlikte Logistic Regression modelinin performansını test edebiliriz. AUC (Area Under Curve) ROC eğrisi altında kalan alandır. AUC tüm olası sınıflandırma eşikleri için toplu bir performans ölçüsüdür.
+
+
+
+
+

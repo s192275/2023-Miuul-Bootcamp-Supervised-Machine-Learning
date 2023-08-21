@@ -1,0 +1,43 @@
+k-NN yöntemi yani (k Nearest Neighbourhood) yöntemi regresyon ve sınıflandırma problemlerinde kullanılabilir. Bir gözlem birimi seçilir ve o birime en yakın olan n birim seçilir. O birimlerin ortalamasını alırız. k-Means'ten farkı k-Means yöntemi veri seti içerisinden rastgele merkezler alıp onlara yakınlığı hesaplayıp merkezleri yakın olan noktaların merkezine çekip bu işlemi iteratif bir şekilde tekrarlayıp unsupervised learning algoritması olması iken kNN yönteminin veriseti içerisinden bir nokta belirleyip ona yakın noktaları tespit etmesi ve supervised learning te kullanılmasıdır.
+CART(Classification And Regression Tree)
+Random forest algoritmasının temelini oluşturur. Veriseti içerisindeki karmaşık yapıları basit yapılara dönüştürmeyi amaçlar.
+Heterojen verisetleri belirlenmiş bir hedef değişkene göre homojen alt gruplara ayrılır.
+Bir karar ağacı şemasında en önemli görülen değişken en tepedekidir.
+Ağaç yöntemleri çok iyi öğrenirler. (Değişkenlere göre ilişkiler incelenip dallara ayrıla ayrıla gittiği için) ama bu beraberinde overfitting problemini de getirir. Bundan dolayı ağaçlarda max depth ve her bir düğümde en az kaç veri olması gerektiği (min samples split)gibi hiperparametreler optimize edilmelidir.
+
+Random Forest (Rastgele Ormanlar) : Temeli birden çok karar ağacının ürettiği tahminlerin bir araya getirilerek değerlendirilmesine dayanır. Bagging ve random subspace yöntemlerinin birleştirilmesi ile oluşmuştur. Ağaçlar için gözlemler bootstrap rastgele örnek seçim yöntemi ile değişkenler random subspace yöntemi ile seçilir. Bu yüzden Random denir. 
+Ağaç oluşturmak için verisetinin 2/3' ü kullanılır. Verisetinin 1/3'ü ile de ağaçların performans değerlendirilmesi ve değişken öneminin tespiti için kullanılır.
+Her düğüm noktasında rastgele seçim yapılır. (Regresyonda p/3, sınıflandırmada karekök p)
+
+Bagging Yöntemi : 1,2,3,..............n adet gözlem olsun. 
+                     |
+		     |
+		     v
+		T adet ağaç için n'er adet gözlem (n < m) bootstrap yöntemi ile (geri bırakarak seçme) seç.
+		     |
+		     |
+		     v
+		n adet gözlemle ve değişken için rastgele seçilmiş alt küme (değişken sayısından küçük) random subspace ağaç oluştur.
+		     |
+		     |
+		     v
+	T adet karar ağacı modelinin ürettiği T adet tahmini bir araya getir.
+--> Bagging yöntemi overfitting e karşı başarılıdır ve aykırı değerlere karşı dirençlidir.
+---> Boosting yöntemi zayıf(temel) tahminleyicileri bir araya getirerek güçlü bir tahminleyici oluşturmayı amaçlar. Her bir tahminleyiciyi ardışık olarak eğitir ve her bir tahminleyicinin hatalarını düzeltmeye çalışır. Hatalı tahmin edilen örnekler daha fazla vurgulanır. Böylece sonraki tahminleyiciler onu düzeltmeye çalışır. Daha düşük bias(sapma) ve daha düşük varyansa sahiptir. Bu iki yöntem de rastgele gözlemler seçerek rastgele gözlemlerde seçilen değişkenlerin arasındaki ilişkiyi inceleyerek çeşitli karar ağaçlarının birleştirilmesini sağlar ve daha güçlü model meydana getirir.
+
+Gradient Boosting Machines : Adaptive Boosting (AdaBoost) yöntemine dayanır. Zayıf sınıflandırıcıların bir araya gelerek güçlü sınıflandırıcıları oluşturmasıdır. 
+Hatalar/ artıklar üzerinde tek bir tahminsel model formunda olan modeller serisi kurulur.
+Boosting + Gradient Descent
+Gradient Boosting tek bir tahminsel model formunda olan modeller serisi oluşturur.
+Seri içerisindeki bir model serideki bir önceki modelin tahmin artıklarının (residence) üzerine kurularak (fit) oluşturulur.
+Tek bir tahminsel model formunda olan modeller adaptive şekilde kurulur.
+
+XGBoost GBM'in hız ve tahmin performansını arttırmak için optimize edilmiş ölçeklenebilir ve farklı platformlara entegre edilebilir versiyonudur.
+
+LightGBM, XGBoost'un eğitim süresi performansını arttırmaya yönelik geliştirilen bir diğer GBM türüdür.
+Lewel-wise büyüme yerine leaf-wise büyüme stratejisi ile daha hızlıdır.
+
+LightGBM'de n_estimators de 10000 e kadar deneyebilirsin.
+
+CatBoost ile kategorik değişkenlerle başa çıkabilir.
+
